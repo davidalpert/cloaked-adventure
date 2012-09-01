@@ -1,0 +1,6 @@
+.hg
+bin
+obj
+packages
+*.suo
+*.user
