@@ -181,6 +181,7 @@ namespace PowerAssert.Infrastructure
 
         static Node MethodCall(MethodCallExpression e)
         {
+
             var parameters = e.Arguments.Select(Parse);
             if(e.Method.GetCustomAttributes(typeof(ExtensionAttribute), true).Any())
             {
@@ -202,7 +203,6 @@ namespace PowerAssert.Infrastructure
                     Parameters = parameters.ToList(),
                 };
             }
-            
         }
 
         static Node Constant(ConstantExpression e)

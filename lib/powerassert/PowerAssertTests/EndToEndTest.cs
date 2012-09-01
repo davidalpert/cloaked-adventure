@@ -49,6 +49,28 @@ namespace PowerAssertTests
         }
 
         [Test]
+        public void Test1()
+        {
+            Func<int, double, int, double, double> calcA = (a, b, c, d) =>
+               a * b * c + d;
+
+            Func<int, double, int, double, double> nc = (e, f, g, h) =>
+                e * Math.Log(f) + g * Math.Log(h);
+
+            int x = 11;
+            int y = 3;
+            double z = calcA(10, 3.48, 1, 134.9);
+            double w = 11.213;
+
+            //PAssert.IsTrue(() => nc(x, c, y, d) == 3.43);
+            Expression<Func<bool>> expression = () => nc(x, z, y, w) == 3.43;
+            Node constantNode = ExpressionParser.Parse(expression.Body);
+            string[] strings = NodeFormatter.Format(constantNode);
+            string s = string.Join(Environment.NewLine, strings);
+            Console.Out.WriteLine(s);
+        }
+
+        [Test]
         public void Test2()
         {
             Expression<Func<int, double, int, double, double>> nc = (y1, p, y2, a) =>

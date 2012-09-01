@@ -16,7 +16,17 @@ namespace PowerAssert.Infrastructure.Nodes
 
         internal override void Walk(NodeWalker walker, int depth)
         {
-            base.Walk(walker, depth);
+            bool isCompiledExpression = base.MemberName.Equals("compile", System.StringComparison.InvariantCultureIgnoreCase);
+
+            if (isCompiledExpression)
+            {
+                base.Container.Walk(walker, depth);
+                walker("."+base.MemberName);
+            }
+            else
+            {
+                base.Walk(walker, depth);
+            }
             walker("(");
             foreach (var parameter in Parameters.Take(1))
             {
